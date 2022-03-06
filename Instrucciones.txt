@@ -1,0 +1,43 @@
+1. Cargar el programa ESP32CAM MQTT Basic
+	Enlace: https://github.com/codigo-iot/ESP32CAM_MQTT-Basic
+
+2. Modificar el programa:	
+	-Colocar nombre de red y contraseña
+	-Instalar biblioteca PubSubClient
+	 	Sketch>Include Library>Library Manager
+	-Actualizar IP del Broker (Local)
+		Identificar la IP mediante el comando ifconfig
+	-Modificar el tema (publicar) codigoIoT/SIC/mqtt
+	
+Nota: La red debe estar en modo puente
+
+3. Importar el Flow5 a Node-Red (se encuentra en GitHub)
+	-Configurar el acceso al broker local
+	-Configurar el dashboard
+
+4. Activar el Firewall de linux y establecer una regla
+	sudo ufw allow 1883
+	sudo ufw enable
+	Reiniciar el equipo
+
+5. Identificar si mosquitto se instaló por snap o apt-get
+	*En mi caso se instaló por apt-get
+
+6. Deshabilitar mosquitto:
+	sudo systemctl stop mosquitto
+
+7. Crear un archivo llamado mosquitto.conf en la ubicación:
+	Equipo/ect/mosquitto/conf.d
+	En este archivo copiar y pegar el contenido del archivo mosquitto.conf que se encuentra en este repositorio.
+	*Identificar que tiene los comandos:
+	allow_anonymous true
+	allow_zero_length_clientid true
+	listener 1883 0.0.0.0
+	*Existe otro archivo con el nombre mosquitto.conf que contiene el codigo de ejemplo, su ubicación cambia de acuerdo con el tipo de instalación. En mi caso se encuentra en:
+	Equipo/usr/share/doc/mosquitto/examples
+
+8. Habilitar mosquitto:
+	sudo systemctl start mosquitto
+
+9. Abrir el monitor serial de Arduino para verificar que la transmisión de la información desde la ESP32 al equipo de computo.
+	
