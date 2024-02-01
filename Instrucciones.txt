@@ -40,4 +40,4 @@ Nota: La red debe estar en modo puente
 	sudo systemctl start mosquitto
 
 9. Abrir el monitor serial de Arduino para verificar que la transmisión de la información desde la ESP32 al equipo de computo.
-	
+En caso de que siga sin funcionar utilizar el comando mosquitto -c mosquitto.conf para arrancar la configuración desde el archivo y no por default
